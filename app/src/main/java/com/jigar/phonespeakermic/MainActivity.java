@@ -185,9 +185,10 @@ public class MainActivity extends AppCompatActivity {
                             .build())
                         .setBufferSizeInBytes(bufSize);
 
-                    // Request low-latency performance mode (Android 10+ / API 29+)
+                    // Request low-latency mode (API 29+). Use int literal 1 = PERFORMANCE_MODE_LOW_LATENCY
+                    // to avoid compile-time symbol failure on runners without API 34 SDK.
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        recBuilder.setPerformanceMode(AudioRecord.PERFORMANCE_MODE_LOW_LATENCY);
+                        recBuilder.setPerformanceMode(1); // AudioRecord.PERFORMANCE_MODE_LOW_LATENCY
                     }
 
                     audioRecord = recBuilder.build();
@@ -250,8 +251,9 @@ public class MainActivity extends AppCompatActivity {
                         .setBufferSizeInBytes(bufSize)
                         .setTransferMode(AudioTrack.MODE_STREAM);
 
+                    // Request low-latency mode (API 26+). Use int literal 1 = PERFORMANCE_MODE_LOW_LATENCY
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        trackBuilder.setPerformanceMode(AudioTrack.PERFORMANCE_MODE_LOW_LATENCY);
+                        trackBuilder.setPerformanceMode(1); // AudioTrack.PERFORMANCE_MODE_LOW_LATENCY
                     }
 
                     audioTrack = trackBuilder.build();
