@@ -1,6 +1,7 @@
 package com.jigar.phonespeakermic;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
 import android.media.AudioFormat;
@@ -10,9 +11,9 @@ import android.media.AudioTrack;
 import android.media.MediaRecorder;
 import android.media.audiofx.AcousticEchoCanceler;
 import android.media.audiofx.NoiseSuppressor;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -184,10 +185,10 @@ public class MainActivity extends AppCompatActivity {
                             .build())
                         .setBufferSizeInBytes(bufSize);
 
-                    // Request low-latency performance mode (Android 10+)
-                    try {
+                    // Request low-latency performance mode (Android 10+ / API 29+)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                         recBuilder.setPerformanceMode(AudioRecord.PERFORMANCE_MODE_LOW_LATENCY);
-                    } catch (Exception ignored) {}
+                    }
 
                     audioRecord = recBuilder.build();
 
@@ -249,9 +250,9 @@ public class MainActivity extends AppCompatActivity {
                         .setBufferSizeInBytes(bufSize)
                         .setTransferMode(AudioTrack.MODE_STREAM);
 
-                    try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         trackBuilder.setPerformanceMode(AudioTrack.PERFORMANCE_MODE_LOW_LATENCY);
-                    } catch (Exception ignored) {}
+                    }
 
                     audioTrack = trackBuilder.build();
                     audioTrack.play();
