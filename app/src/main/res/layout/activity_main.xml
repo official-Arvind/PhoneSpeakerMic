@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#070B14"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="28dp"
+        android:gravity="center_horizontal">
+
+        <!-- ─── Header ────────────────────────────────────────── -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚡ PhoneSpeakerMic"
+            android:textSize="26sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ULTRA-LOW LATENCY  ·  5ms ENGINE"
+            android:textSize="10sp"
+            android:fontFamily="sans-serif"
+            android:textColor="#00E5FF"
+            android:letterSpacing="0.18"
+            android:layout_marginBottom="36dp"/>
+
+        <!-- ─── IP Input ──────────────────────────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PC IP ADDRESS"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#4A5568"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etServerIp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="e.g.  192.168.1.100"
+            android:textColorHint="#2D3748"
+            android:inputType="textVisiblePassword"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/bg_input_premium"
+            android:textColor="#E2E8F0"
+            android:textSize="18sp"
+            android:fontFamily="monospace"
+            android:layout_marginBottom="28dp"/>
+
+        <!-- ─── Mode Selector ─────────────────────────────────── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="STREAMING MODE"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#4A5568"
+            android:letterSpacing="0.12"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <!-- MIC only -->
+            <Button
+                android:id="@+id/btnModeMic"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="🎤 MIC"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05"
+                android:background="@drawable/bg_mode_mic"
+                android:textColor="#FFFFFF"
+                android:stateListAnimator="@null"
+                android:layout_marginEnd="6dp"/>
+
+            <!-- SPEAKER only -->
+            <Button
+                android:id="@+id/btnModeSpeaker"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="🔊 SPEAKER"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05"
+                android:background="@drawable/bg_mode_speaker"
+                android:textColor="#FFFFFF"
+                android:stateListAnimator="@null"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"/>
+
+            <!-- BOTH -->
+            <Button
+                android:id="@+id/btnModeBoth"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="🔄 BOTH"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05"
+                android:background="@drawable/bg_mode_both"
+                android:textColor="#FFFFFF"
+                android:stateListAnimator="@null"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
+
+        <!-- Active mode label -->
+        <TextView
+            android:id="@+id/tvMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🎤🔊  Bidirectional"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif"
+            android:textColor="#00E5FF"
+            android:textAlignment="center"
+            android:layout_marginBottom="28dp"/>
+
+        <!-- ─── Status ────────────────────────────────────────── -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Disconnected"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#4A5568"
+            android:textAlignment="center"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- ─── Connect Buttons ───────────────────────────────── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <Button
+                android:id="@+id/btnConnect"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="WIFI LINK"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.1"
+                android:background="@drawable/bg_button_connect"
+                android:textColor="#070B14"
+                android:stateListAnimator="@null"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnUsbConnect"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="USB MODE"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.1"
+                android:background="@drawable/bg_button_usb"
+                android:textColor="#FFFFFF"
+                android:stateListAnimator="@null"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnDisconnect"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="DISCONNECT"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.1"
+            android:background="@drawable/bg_button_disconnect"
+            android:textColor="#FC5C7D"
+            android:stateListAnimator="@null"
+            android:layout_marginBottom="28dp"/>
+
+        <!-- ─── Info Card ──────────────────────────────────────── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_premium"
+            android:padding="20dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QUICK GUIDE"
+                android:textSize="10sp"
+                android:fontFamily="sans-serif-black"
+                android:textColor="#4A5568"
+                android:letterSpacing="0.15"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. Run pc_server.py on your laptop\n2. Pick a mode above\n3. Enter IP → tap WIFI LINK\n   (or plug USB cable → USB MODE)\n\nLaptop speakers auto-mute on connect."
+                android:textSize="13sp"
+                android:textColor="#718096"
+                android:lineSpacingExtra="5dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
