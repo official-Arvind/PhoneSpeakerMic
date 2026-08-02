@@ -1,0 +1,214 @@
+name: ⚡ Build & Release APK
+
+on:
+  push:
+    branches: [main]
+    tags:    ['v*.*.*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:          # Manual trigger from GitHub UI
+
+# ─── Global env ────────────────────────────────────────────────────────────────
+env:
+  # Feed every last MB of the runner's RAM to Gradle / JVM
+  GRADLE_OPTS: >-
+    -Xmx7g
+    -Xms2g
+    -XX:MaxMetaspaceSize=1g
+    -XX:+HeapDumpOnOutOfMemoryError
+    -XX:ReservedCodeCacheSize=512m
+    -XX:+UseG1GC
+    -XX:G1HeapRegionSize=32m
+    -XX:+UseStringDeduplication
+    -Dfile.encoding=UTF-8
+  # Kotlin daemon gets its own slice
+  KOTLIN_DAEMON_JVM_ARGS: >-
+    -Xmx4g
+    -Xms512m
+    -XX:MaxMetaspaceSize=512m
+    -XX:+UseG1GC
+    -Dkotlin.daemon.jvm.options=-Xmx4g
+  # Android build cache (persisted across runs)
+  ANDROID_HOME: /usr/local/lib/android/sdk
+
+jobs:
+  # ═══════════════════════════════════════════════════════════════════════════
+  build:
+    name: 🔨 Build Debug APK
+    runs-on: ubuntu-latest          # 7 GB RAM, 2 vCPUs — we'll use every byte
+
+    steps:
+      # ── Checkout ──────────────────────────────────────────────────────────
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0            # Full history for version tags
+
+      # ── JDK (Eclipse Temurin = fastest GC, best G1 support) ──────────────
+      - name: ☕ Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle             # Cache ~/.gradle automatically
+
+      # ── Gradle performance flags ──────────────────────────────────────────
+      - name: ⚙️ Configure Gradle for max performance
+        run: |
+          mkdir -p ~/.gradle
+          cat >> ~/.gradle/gradle.properties << 'EOF'
+          # ── JVM memory — use every available MB ──
+          org.gradle.jvmargs=-Xmx7g -Xms2g -XX:MaxMetaspaceSize=1g \
+            -XX:ReservedCodeCacheSize=512m -XX:+HeapDumpOnOutOfMemoryError \
+            -XX:+UseG1GC -XX:G1HeapRegionSize=32m \
+            -XX:+UseStringDeduplication -Dfile.encoding=UTF-8
+          # ── Parallel build (all vCPUs) ──
+          org.gradle.parallel=true
+          org.gradle.workers.max=4
+          org.gradle.configureondemand=true
+          # ── Build cache ──
+          org.gradle.caching=true
+          # ── Kotlin daemon ──
+          kotlin.daemon.jvm.options=-Xmx4g -XX:+UseG1GC
+          # ── File watching (faster incremental) ──
+          org.gradle.vfs.watch=true
+          # ── No daemon for CI (clean slate, avoids OOM accumulation) ──
+          org.gradle.daemon=false
+          # ── Android-specific ──
+          android.enableJetifier=false
+          android.useAndroidX=true
+          android.nonTransitiveRClass=true
+          EOF
+          echo "Gradle properties written:"
+          cat ~/.gradle/gradle.properties
+
+      # ── Show available RAM for visibility ────────────────────────────────
+      - name: 📊 Runner resource info
+        run: |
+          echo "=== CPU ==="
+          nproc
+          echo "=== RAM ==="
+          free -h
+          echo "=== Disk ==="
+          df -h /
+          echo "=== Java ==="
+          java -Xmx7g -version 2>&1
+
+      # ── Gradle wrapper permissions ────────────────────────────────────────
+      - name: 🔑 Grant gradlew execute permission
+        run: chmod +x gradlew
+
+      # ── Gradle build cache restore ────────────────────────────────────────
+      - name: 🗄️ Restore Gradle & Android build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.android/build-cache
+            app/.gradle
+            .gradle
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'app/src/**/*.java') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
+
+      # ── Assemble DEBUG APK ────────────────────────────────────────────────
+      - name: 🏗️ Build Debug APK
+        run: |
+          ./gradlew assembleDebug \
+            --no-daemon \
+            --max-workers=4 \
+            --build-cache \
+            --parallel \
+            --info \
+            -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.LargeTest
+        env:
+          JAVA_TOOL_OPTIONS: -Xmx7g
+
+      # ── Rename APK with version ───────────────────────────────────────────
+      - name: 📦 Rename & stage APK
+        run: |
+          APK_PATH=$(find app/build/outputs/apk/debug -name "*.apk" | head -1)
+          echo "Found APK: $APK_PATH"
+          # Get version from build.gradle
+          VERSION=$(grep 'versionName' app/build.gradle | grep -oP '"[^"]+"' | tr -d '"')
+          DATE=$(date +'%Y%m%d')
+          NEW_NAME="PhoneSpeakerMic-v${VERSION}-debug-${DATE}.apk"
+          cp "$APK_PATH" "$NEW_NAME"
+          echo "APK_PATH=$APK_PATH"   >> $GITHUB_ENV
+          echo "APK_NAME=$NEW_NAME"   >> $GITHUB_ENV
+          echo "VERSION=$VERSION"     >> $GITHUB_ENV
+          ls -lh *.apk
+
+      # ── Upload artifact (every build) ────────────────────────────────────
+      - name: 📤 Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PhoneSpeakerMic-debug-apk
+          path: ${{ env.APK_NAME }}
+          retention-days: 30
+          compression-level: 0      # APK is already zipped
+
+      # ── Print build summary ───────────────────────────────────────────────
+      - name: 📋 Build summary
+        run: |
+          echo "## ⚡ PhoneSpeakerMic Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Property | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| APK | \`${{ env.APK_NAME }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Version | \`${{ env.VERSION }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | \`${{ github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          APK_SIZE=$(du -sh "${{ env.APK_NAME }}" | cut -f1)
+          echo "| APK Size | $APK_SIZE |" >> $GITHUB_STEP_SUMMARY
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  release:
+    name: 🚀 Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    # Only run on version tags (e.g. v2.0, v2.1.3)
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 📦 Download built APK
+        uses: actions/download-artifact@v4
+        with:
+          name: PhoneSpeakerMic-debug-apk
+
+      - name: 🏷️ Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "⚡ PhoneSpeakerMic ${{ github.ref_name }}"
+          body: |
+            ## ⚡ PhoneSpeakerMic ${{ github.ref_name }}
+
+            > Ultra-Low Latency Android Audio Bridge · By Jigar Corp
+
+            ### What's New
+            See [CHANGELOG](https://github.com/official-Arvind/PhoneSpeakerMic/commits/main) for details.
+
+            ### Install
+            1. Download the APK below
+            2. Install on your Android phone (enable Unknown Sources)
+            3. Run `python pc_server.py` on your PC
+            4. Connect and stream!
+
+            ### Requirements
+            - Android 6.0+ (API 23+)
+            - PC: `pip install pyaudiowpatch numpy pycaw comtypes`
+
+            ---
+            **No Ads · No Subscriptions · Zero Tracking · Local First**
+            Support: `arvindji@fam` · [Jigar Corp](https://official-arvind.github.io/jigar-tools/)
+          files: "*.apk"
+          draft: false
+          prerelease: false
+          generate_release_notes: true

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhoneSpeakerMic — Ultra-Low Latency Audio Bridge by Jigar Corp</title>
+  <meta name="description" content="Use your Android phone as a PC mic and speaker with 5ms latency. Free, open-source, zero tracking. WiFi & USB support. By Jigar Corp." />
+  <meta name="keywords" content="phone speaker mic, android pc audio, low latency, wireless mic, phone as speaker, jigar corp" />
+  <meta property="og:title" content="PhoneSpeakerMic — 5ms Audio Bridge" />
+  <meta property="og:description" content="Use your Android phone as a PC mic & speaker. 5ms engine, zero cloud, free forever." />
+  <meta property="og:url" content="https://official-arvind.github.io/PhoneSpeakerMic/" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════ NAVBAR ══ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">⚡ PhoneSpeakerMic</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#modes">Modes</a>
+        <a href="#latency">Performance</a>
+        <a href="#setup">Setup</a>
+        <a href="https://github.com/official-Arvind/PhoneSpeakerMic" target="_blank" class="nav-gh">GitHub ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ HERO ══ -->
+  <section class="hero" id="home">
+    <div class="hero-glow glow-1"></div>
+    <div class="hero-glow glow-2"></div>
+    <div class="hero-glow glow-3"></div>
+
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        By Jigar Corp · 100% Free &amp; Open Source
+      </div>
+
+      <h1 class="hero-title">
+        Your Phone.<br />
+        <span class="gradient-text">Your Audio Device.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Turn any Android phone into a <strong>PC microphone &amp; speaker</strong> with
+        near-zero latency. No Bluetooth lag. No cloud. No ads. Just raw audio — engineered to perfection.
+      </p>
+
+      <div class="hero-pills">
+        <span class="pill pill-cyan">5ms Engine</span>
+        <span class="pill pill-indigo">WiFi &amp; USB</span>
+        <span class="pill pill-green">Hardware AEC</span>
+        <span class="pill pill-pink">Auto Speaker Mute</span>
+        <span class="pill pill-slate">Zero Tracking</span>
+      </div>
+
+      <div class="hero-cta">
+        <a href="https://github.com/official-Arvind/PhoneSpeakerMic/releases/latest" class="btn btn-primary" id="download-apk">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download APK
+        </a>
+        <a href="https://github.com/official-Arvind/PhoneSpeakerMic" class="btn btn-ghost" id="view-source">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          View Source
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">5ms</span>
+          <span class="stat-label">Buffer Latency</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <span class="stat-num">48kHz</span>
+          <span class="stat-label">Native Sample Rate</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Streaming Modes</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <span class="stat-num">0</span>
+          <span class="stat-label">Cloud Connections</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ MODES ══ -->
+  <section class="section" id="modes">
+    <div class="section-inner">
+      <p class="section-eyebrow">Choose Your Mode</p>
+      <h2 class="section-title">One App. Three Modes.</h2>
+      <p class="section-desc">Pick exactly what you need before connecting. The server only activates the required streams — zero wasted processing.</p>
+
+      <div class="modes-grid">
+        <div class="mode-card mode-mic" id="mode-card-mic">
+          <div class="mode-icon">🎤</div>
+          <h3>MIC Only</h3>
+          <p>Phone microphone streams directly to your PC as a virtual input device. Perfect for Discord, Zoom, Teams, OBS.</p>
+          <div class="mode-tag tag-blue">0x01 Protocol</div>
+          <ul class="mode-list">
+            <li>Hardware AEC enabled</li>
+            <li>Noise suppressor active</li>
+            <li>Routes to VB-Audio CABLE</li>
+          </ul>
+        </div>
+
+        <div class="mode-card mode-speaker" id="mode-card-speaker">
+          <div class="mode-icon">🔊</div>
+          <h3>SPEAKER Only</h3>
+          <p>Your PC's system audio loopback streams to the phone speaker. Use your phone as a wireless monitor speaker.</p>
+          <div class="mode-tag tag-green">0x02 Protocol</div>
+          <ul class="mode-list">
+            <li>Loopback capture (WASAPI)</li>
+            <li>Auto stereo → mono mix</li>
+            <li>Laptop speakers auto-mute</li>
+          </ul>
+        </div>
+
+        <div class="mode-card mode-both" id="mode-card-both">
+          <div class="mode-icon">🔄</div>
+          <h3>BOTH</h3>
+          <p>Full bidirectional bridge. Phone mic goes to PC, PC audio goes to phone. Complete audio device replacement.</p>
+          <div class="mode-tag tag-cyan">0x03 Protocol</div>
+          <ul class="mode-list">
+            <li>Two independent streams</li>
+            <li>Dual callback pipelines</li>
+            <li>Full mode on single socket</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ LATENCY ══ -->
+  <section class="section section-dark" id="latency">
+    <div class="section-inner">
+      <p class="section-eyebrow">Performance</p>
+      <h2 class="section-title">The 5ms Engine</h2>
+      <p class="section-desc">Every parameter hand-tuned. Every millisecond accounted for.</p>
+
+      <div class="latency-table-wrap">
+        <table class="latency-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>v1 (Old)</th>
+              <th>v2 (Now)</th>
+              <th>Gain</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Buffer chunk</td>
+              <td class="old">2048 samples <span class="sub">46ms</span></td>
+              <td class="new">256 samples <span class="sub">5.3ms</span></td>
+              <td class="gain">8× faster</td>
+            </tr>
+            <tr>
+              <td>Sample rate</td>
+              <td class="old">44,100 Hz <span class="sub">resampling overhead</span></td>
+              <td class="new">48,000 Hz <span class="sub">native</span></td>
+              <td class="gain">Zero overhead</td>
+            </tr>
+            <tr>
+              <td>Audio pipeline</td>
+              <td class="old">Blocking read()</td>
+              <td class="new">Callback mode</td>
+              <td class="gain">No Python blocking</td>
+            </tr>
+            <tr>
+              <td>Thread priority</td>
+              <td class="old">Default</td>
+              <td class="new">AUDIO / HIGH_PRIORITY</td>
+              <td class="gain">OS prefers audio</td>
+            </tr>
+            <tr>
+              <td>Echo cancellation</td>
+              <td class="old">None</td>
+              <td class="new">Hardware AEC + NS</td>
+              <td class="gain">Studio-grade clean</td>
+            </tr>
+            <tr>
+              <td>Speaker routing</td>
+              <td class="old">Manual</td>
+              <td class="new">Auto-mute on connect</td>
+              <td class="gain">Instant switch</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="connection-cards">
+        <div class="conn-card" id="conn-usb">
+          <div class="conn-icon">🔌</div>
+          <div class="conn-label">USB Cable (ADB)</div>
+          <div class="conn-latency cyan">3–7ms</div>
+          <div class="conn-bar"><div class="bar-fill bar-usb"></div></div>
+          <div class="conn-note">Lowest possible. Loopback through ADB reverse tunnel.</div>
+        </div>
+        <div class="conn-card" id="conn-wifi">
+          <div class="conn-icon">📡</div>
+          <div class="conn-label">WiFi (Good Signal)</div>
+          <div class="conn-latency indigo">10–20ms</div>
+          <div class="conn-bar"><div class="bar-fill bar-wifi"></div></div>
+          <div class="conn-note">Excellent for calls. Imperceptible lag in practice.</div>
+        </div>
+        <div class="conn-card" id="conn-bt">
+          <div class="conn-icon">📶</div>
+          <div class="conn-label">Bluetooth (for comparison)</div>
+          <div class="conn-latency muted">100–300ms</div>
+          <div class="conn-bar"><div class="bar-fill bar-bt"></div></div>
+          <div class="conn-note">Not used by this app. Shown for reference.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ FEATURES ══ -->
+  <section class="section" id="features">
+    <div class="section-inner">
+      <p class="section-eyebrow">What's Inside</p>
+      <h2 class="section-title">Precision-Engineered. Every Detail.</h2>
+
+      <div class="features-grid">
+        <div class="feat-card" id="feat-aec">
+          <div class="feat-icon">🎙️</div>
+          <h3>Hardware AEC</h3>
+          <p>Acoustic Echo Cancellation runs directly on your phone's dedicated audio DSP — zero CPU overhead, studio-grade mic quality.</p>
+        </div>
+        <div class="feat-card" id="feat-mute">
+          <div class="feat-icon">🔇</div>
+          <h3>Auto Speaker Mute</h3>
+          <p>Windows Core Audio API (pycaw) mutes your laptop speakers the instant the phone connects. Restores exact volume on disconnect.</p>
+        </div>
+        <div class="feat-card" id="feat-usb">
+          <div class="feat-icon">🔌</div>
+          <h3>USB ADB Mode</h3>
+          <p>Skip WiFi entirely. Plug a USB cable, server runs <code>adb reverse</code> automatically — sub-7ms latency guaranteed.</p>
+        </div>
+        <div class="feat-card" id="feat-cb">
+          <div class="feat-icon">⚡</div>
+          <h3>Callback Audio</h3>
+          <p>Python's blocking <code>stream.read()</code> is replaced with hardware-timed callbacks. The OS audio clock drives everything.</p>
+        </div>
+        <div class="feat-card" id="feat-prio">
+          <div class="feat-icon">🧵</div>
+          <h3>Thread Priority</h3>
+          <p><code>THREAD_PRIORITY_AUDIO</code> on Android + <code>HIGH_PRIORITY_CLASS</code> on Windows. Scheduler never deprioritizes audio.</p>
+        </div>
+        <div class="feat-card" id="feat-private">
+          <div class="feat-icon">🔒</div>
+          <h3>100% Private</h3>
+          <p>Direct TCP socket on your local network. Zero internet. Zero accounts. Zero analytics. Every byte stays in your home.</p>
+        </div>
+        <div class="feat-card" id="feat-ns">
+          <div class="feat-icon">🧹</div>
+          <h3>Noise Suppressor</h3>
+          <p>Android's hardware noise suppressor runs alongside AEC — keyboard clicks, fans, background noise: all filtered out.</p>
+        </div>
+        <div class="feat-card" id="feat-bloat">
+          <div class="feat-icon">🛡️</div>
+          <h3>Buffer Bloat Guard</h3>
+          <p>Server caps the ring buffer at 20ms. Old data is dropped aggressively — no artificial delay builds up over time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ SETUP ══ -->
+  <section class="section section-dark" id="setup">
+    <div class="section-inner">
+      <p class="section-eyebrow">Get Started</p>
+      <h2 class="section-title">Up in 3 Steps.</h2>
+
+      <div class="steps">
+        <div class="step" id="step-1">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h3>PC Setup</h3>
+            <p>Install Python 3.10+ and run one command:</p>
+            <div class="code-block">
+              <code>pip install pyaudiowpatch numpy pycaw comtypes</code>
+              <button class="copy-btn" onclick="copyCode(this)" data-code="pip install pyaudiowpatch numpy pycaw comtypes">Copy</button>
+            </div>
+            <div class="code-block">
+              <code>python pc_server.py</code>
+              <button class="copy-btn" onclick="copyCode(this)" data-code="python pc_server.py">Copy</button>
+            </div>
+            <p class="step-note">Optional: Install <a href="https://vb-audio.com/Cable/" target="_blank">VB-Audio Virtual Cable</a> to use phone mic in Zoom/Discord as a proper device.</p>
+          </div>
+        </div>
+
+        <div class="step" id="step-2">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h3>Install the App</h3>
+            <p>Download the APK from Releases or build from source in Android Studio.</p>
+            <a href="https://github.com/official-Arvind/PhoneSpeakerMic/releases/latest" class="btn btn-primary btn-sm" id="step-download">⬇ Download APK</a>
+            <p class="step-note">Grant microphone permission when prompted.</p>
+          </div>
+        </div>
+
+        <div class="step" id="step-3">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h3>Connect &amp; Stream</h3>
+            <p>Same WiFi network → pick your mode → enter PC IP → tap <strong>WIFI LINK</strong>.</p>
+            <p>Your laptop speakers auto-mute. Phone takes over. Done.</p>
+            <p class="step-note">For lowest latency: plug USB cable → tap <strong>USB MODE</strong> instead.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ PRIVACY ══ -->
+  <section class="section privacy-section" id="privacy">
+    <div class="section-inner">
+      <h2 class="section-title">Jigar Corp Privacy Standard</h2>
+      <p class="section-desc">Every Jigar Corp product is built on the same non-negotiable foundation.</p>
+      <div class="privacy-grid">
+        <div class="privacy-item" id="priv-1"><span>✅</span> Local network only — zero internet required</div>
+        <div class="privacy-item" id="priv-2"><span>✅</span> No data ever leaves your network</div>
+        <div class="privacy-item" id="priv-3"><span>✅</span> No accounts, no sign-ins</div>
+        <div class="privacy-item" id="priv-4"><span>✅</span> No telemetry, no analytics, no logs</div>
+        <div class="privacy-item" id="priv-5"><span>✅</span> No ads, no subscriptions, no paywalls</div>
+        <div class="privacy-item" id="priv-6"><span>✅</span> Fully open source — read every line</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ ECOSYSTEM ══ -->
+  <section class="section" id="ecosystem">
+    <div class="section-inner">
+      <p class="section-eyebrow">Jigar Corp Ecosystem</p>
+      <h2 class="section-title">More Tools. All Free.</h2>
+      <div class="eco-grid">
+        <a href="https://official-arvind.github.io/jigar-tools/" class="eco-card" id="eco-jigar" target="_blank">
+          <div class="eco-icon">🛠️</div>
+          <div class="eco-body">
+            <h4>Jigar Tools</h4>
+            <p>Free, privacy-first web utility suite</p>
+          </div>
+          <span class="eco-arrow">↗</span>
+        </a>
+        <a href="https://official-arvind.github.io/UPIPaymentAlert/" class="eco-card" id="eco-upi" target="_blank">
+          <div class="eco-icon">💰</div>
+          <div class="eco-body">
+            <h4>UPI Payment Alert</h4>
+            <p>Offline-first automatic soundbox</p>
+          </div>
+          <span class="eco-arrow">↗</span>
+        </a>
+        <a href="https://official-arvind.github.io/docpurge-ai/" class="eco-card" id="eco-doc" target="_blank">
+          <div class="eco-icon">📄</div>
+          <div class="eco-body">
+            <h4>DocPurge AI</h4>
+            <p>Surgical PDF watermark removal</p>
+          </div>
+          <span class="eco-arrow">↗</span>
+        </a>
+        <a href="https://official-arvind.github.io/director-ai/" class="eco-card" id="eco-dir" target="_blank">
+          <div class="eco-icon">🤖</div>
+          <div class="eco-body">
+            <h4>Director AI</h4>
+            <p>Real-time AI pipeline assistant</p>
+          </div>
+          <span class="eco-arrow">↗</span>
+        </a>
+        <a href="https://github.com/official-Arvind/Jigar-Backup" class="eco-card" id="eco-bak" target="_blank">
+          <div class="eco-icon">💾</div>
+          <div class="eco-body">
+            <h4>Jigar Backup</h4>
+            <p>God Mode Android backup suite</p>
+          </div>
+          <span class="eco-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ FOOTER ══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">⚡ PhoneSpeakerMic</span>
+        <span class="footer-by">by <a href="https://official-arvind.github.io/jigar-tools/" target="_blank">Jigar Corp</a></span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/official-Arvind/PhoneSpeakerMic" target="_blank">GitHub</a>
+        <a href="https://github.com/official-Arvind/PhoneSpeakerMic/releases" target="_blank">Releases</a>
+        <a href="https://github.com/official-Arvind/PhoneSpeakerMic/issues" target="_blank">Issues</a>
+        <a href="https://official-arvind.github.io/jigar-tools/" target="_blank">Jigar Tools</a>
+      </div>
+      <div class="footer-upi">
+        Support via UPI: <strong>arvindji@fam</strong>
+      </div>
+      <p class="footer-tagline">No Ads · No Subscriptions · Zero Tracking · Local First · Open Source Forever</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Copy code button
+    function copyCode(btn) {
+      const code = btn.getAttribute('data-code');
+      navigator.clipboard.writeText(code).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1800);
+      });
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll(
+      '.mode-card, .feat-card, .step, .conn-card, .eco-card, .privacy-item, .latency-table-wrap'
+    ).forEach(el => { el.classList.add('reveal'); observer.observe(el); });
+  </script>
+</body>
+</html>
