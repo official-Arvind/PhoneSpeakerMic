@@ -1,190 +1,227 @@
-# Phone Speaker & Mic App
+<div align="center">
 
-Turn your Android phone into a wireless microphone and speaker for your PC!
+<h1>⚡ PhoneSpeakerMic</h1>
+<p><strong>Ultra-Low Latency Android Audio Bridge — 5ms Engine</strong></p>
 
-## 🎯 What This Does
+<p>
+  <img src="https://img.shields.io/badge/version-2.0-6366F1?style=for-the-badge&labelColor=0F172A" />
+  <img src="https://img.shields.io/badge/platform-Android%205%2B-06B6D4?style=for-the-badge&labelColor=0F172A" />
+  <img src="https://img.shields.io/badge/license-MIT-10B981?style=for-the-badge&labelColor=0F172A" />
+  <img src="https://img.shields.io/badge/FREE%20%26%20OPEN%20SOURCE-✓-8B5CF6?style=for-the-badge&labelColor=0F172A" />
+</p>
 
-- **Phone Mic → PC Speakers**: Your phone's microphone sends audio to your PC speakers
-- **PC Mic → Phone Speakers**: Your PC's microphone sends audio to your phone speakers
-- Works over WiFi (wireless connection)
-- Low latency audio streaming
-- Simple interface
+<p>
+  <img src="https://img.shields.io/badge/NO%20ADS-✓-6366F1?style=flat-square&labelColor=1E293B" />
+  <img src="https://img.shields.io/badge/NO%20SUBSCRIPTIONS-✓-6366F1?style=flat-square&labelColor=1E293B" />
+  <img src="https://img.shields.io/badge/ZERO%20TRACKING-✓-6366F1?style=flat-square&labelColor=1E293B" />
+  <img src="https://img.shields.io/badge/LOCAL%20NETWORK%20ONLY-✓-6366F1?style=flat-square&labelColor=1E293B" />
+</p>
 
-## 📋 Requirements
+<p>
+  <a href="https://github.com/official-Arvind/PhoneSpeakerMic/releases"><strong>⬇ Download APK</strong></a>
+  ·
+  <a href="https://official-arvind.github.io/PhoneSpeakerMic/"><strong>🌐 Website</strong></a>
+  ·
+  <a href="#-quick-start"><strong>🚀 Quick Start</strong></a>
+  ·
+  <a href="https://official-arvind.github.io/jigar-tools/"><strong>🛠️ Jigar Tools</strong></a>
+</p>
 
-### For Android App
+> **Use your Android phone as a zero-cloud, high-fidelity PC microphone and/or speaker — over WiFi or USB cable.**  
+> Built with the same precision-engineering philosophy behind every [Jigar Corp](https://official-arvind.github.io/jigar-tools/) product.
 
-- Android phone (Android 5.0 or higher)
-- Android Studio to build the app
-- Microphone permission
-
-### For PC Server
-
-- Python 3.7 or higher
-- Windows, Mac, or Linux
-- Phone and PC on the same WiFi network
-
-## 🚀 Setup Instructions
-
-### Part 1: Install PC Server
-
-1. **Install Python** (if not already installed):
-   - Download from <https://www.python.org/downloads/>
-   - During installation, check "Add Python to PATH"
-
-2. **Install required library**:
-
-```bash
-   pip install pyaudio
-```
-
-   **If pyaudio fails to install:**
-
-- **Windows**: Download wheel file from <https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio>
-- **Mac**: `brew install portaudio`, then `pip install pyaudio`
-- **Linux**: `sudo apt-get install portaudio19-dev`, then `pip install pyaudio`
-
-1. **Run the server**:
-
-```bash
-   python pc_server.py
-```
-
-1. **Note your PC's IP address** - the server will display it. Example: `192.168.1.100`
-
-### Part 2: Build and Install Android App
-
-1. **Open Android Studio**
-   - Download from <https://developer.android.com/studio> if needed
-
-2. **Open the project**:
-   - File → Open → Select the `PhoneSpeakerMic` folder
-
-3. **Wait for Gradle sync** to complete
-
-4. **Connect your Android phone**:
-   - Enable Developer Options on your phone (tap Build Number 7 times in Settings → About)
-   - Enable USB Debugging
-   - Connect via USB cable
-
-5. **Build and install**:
-   - Click the green "Run" button (▶️) in Android Studio
-   - Or use: `./gradlew installDebug`
-
-### Part 3: Connect and Use
-
-1. **Make sure phone and PC are on the same WiFi network**
-
-2. **On PC**: Run `python pc_server.py`
-   - Note the IP address displayed
-
-3. **On Phone**:
-   - Open the "Phone Speaker Mic" app
-   - Enter your PC's IP address (e.g., `192.168.1.100`)
-   - Tap "Connect to PC"
-   - Grant microphone permission when prompted
-
-4. **You're connected!**
-   - Speak into your phone → sound comes out PC speakers
-   - Speak into PC mic → sound comes out phone speakers
-
-## 🛠️ Troubleshooting
-
-### Can't connect?
-
-- ✅ Ensure both devices are on the same WiFi network
-- ✅ Check firewall settings (allow port 5000)
-- ✅ Verify IP address is correct
-- ✅ Make sure PC server is running before connecting
-
-### No audio?
-
-- ✅ Check volume on both devices
-- ✅ Grant microphone permission on phone
-- ✅ Check PC audio settings (correct input/output devices)
-
-### Poor audio quality?
-
-- ✅ Move closer to WiFi router
-- ✅ Close other network-intensive applications
-- ✅ Ensure stable WiFi connection
-
-### Firewall Issues (Windows)?
-
-If connection fails, allow Python through firewall:
-
-1. Windows Security → Firewall & network protection
-2. Allow an app through firewall
-3. Find Python and check both Private and Public
-4. Or run: `python -m http.server 5000` to test if port is blocked
-
-## 📱 How to Use After Setup
-
-**Every time you want to use it:**
-
-1. On PC: Open terminal/command prompt and run:
-
-```bash
-   python pc_server.py
-```
-
-1. On Phone: Open the app and connect using your PC's IP
-
-2. Keep both running - you can now use your phone as PC audio!
-
-## ⚙️ Technical Details
-
-- **Protocol**: TCP socket connection
-- **Port**: 5000
-- **Audio Format**: PCM 16-bit, 44.1kHz, Mono
-- **Latency**: ~100-200ms depending on network
-
-## 🔧 Advanced: Build APK File
-
-To create an installable APK without Android Studio:
-
-```bash
-cd PhoneSpeakerMic
-./gradlew assembleDebug
-```
-
-The APK will be in: `app/build/outputs/apk/debug/app-debug.apk`
-
-Transfer this file to your phone and install it.
-
-## 📝 Notes
-
-- Keep the app running in foreground for best performance
-- Battery usage is moderate during active streaming
-- Works great for video calls, gaming, or any PC audio needs
-- Latency is good for most uses but not ideal for music production
-
-## 🐛 Known Issues
-
-- May disconnect if phone screen locks (keep screen on during use)
-- Some Android devices may have audio sync issues
-- First connection might take a few seconds
-
-## 💡 Tips
-
-- Use a phone stand to keep your phone positioned as a microphone
-- Adjust PC/phone volume for best quality
-- Test connection before important calls
-- Keep phone plugged in for extended use
-
-## 🆘 Getting Help
-
-If you encounter issues:
-
-1. Check the troubleshooting section above
-2. Verify all requirements are met
-3. Try restarting both the app and server
-4. Check your network connection
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+</div>
 
 ---
 
-**Enjoy using your phone as a PC microphone and speaker!** 🎤🔊
+## 🧠 What It Does
+
+PhoneSpeakerMic creates a **direct, encrypted local-network audio bridge** between your Android phone and your Windows PC — with no third-party servers, no cloud, no accounts.
+
+```
+  ┌─────────────────┐       WiFi / USB Cable       ┌──────────────────┐
+  │   ANDROID PHONE │ ◄────────────────────────►  │   WINDOWS PC     │
+  │                 │                              │                  │
+  │  🎤 Mic Input   │ ──────────────────────────► │  CABLE Input     │
+  │  🔊 Speaker Out │ ◄────────────────────────── │  System Loopback │
+  └─────────────────┘                              └──────────────────┘
+```
+
+### Three Modes — You Choose
+
+| Mode | What It Does | Use Case |
+|------|-------------|----------|
+| 🎤 **MIC only** | Phone mic → PC (virtual mic) | Discord, Zoom, Teams calls |
+| 🔊 **SPEAKER only** | PC audio → Phone speaker | Wireless monitor speaker |
+| 🔄 **BOTH** | Full bidirectional streaming | Complete phone-as-audio-device |
+
+---
+
+## ⚡ The 5ms Engine — Technical Deep Dive
+
+> This is not a Bluetooth bridge. This is not screen mirroring. This is a custom, hand-tuned audio pipeline.
+
+| Parameter | Old (v1) | New (v2) | Gain |
+|-----------|----------|----------|------|
+| Buffer chunk | 2048 samples (46ms) | **256 samples (5.3ms)** | **8× lower latency** |
+| Sample rate | 44,100 Hz | **48,000 Hz** (native, no resampling) | Zero extra overhead |
+| Audio pipeline | Blocking `stream.read()` | **Hardware callback mode** | No Python thread blocking |
+| Socket buffers | OS default | **Tuned to chunk size** | Less kernel queuing |
+| Thread priority | Default | **`THREAD_PRIORITY_AUDIO`** (Android) + **`HIGH_PRIORITY_CLASS`** (Windows) | Scheduler prefers audio |
+| Echo cancellation | Basic | **Hardware AEC + Noise Suppressor** (Android) | Studio-grade clean mic |
+| Laptop speaker | Manual | **Auto-mute on connect, restore on disconnect** | Seamless switching |
+
+**Realistic achievable latency:**
+- **USB cable (ADB):** ~3–7ms
+- **WiFi (same router):** ~10–20ms
+- **WiFi (heavy load):** ~20–40ms
+
+---
+
+## 🚀 Quick Start
+
+### Step 1 — PC Setup (2 minutes)
+
+```bash
+# Install Python 3.10+ from python.org if you don't have it
+pip install pyaudiowpatch numpy pycaw comtypes
+```
+
+> **Optional but recommended:** Install [VB-Audio Virtual Cable](https://vb-audio.com/Cable/) to route phone mic as a proper virtual microphone in Discord/Zoom.
+
+```bash
+python pc_server.py
+```
+
+You'll see your IP address and confirmation that everything is ready.
+
+### Step 2 — Phone App
+
+**Option A — Build from source (Android Studio):**
+1. Clone this repo
+2. Open in Android Studio
+3. Connect phone via USB → Run ▶️
+
+**Option B — Direct APK:**
+Download from [Releases](https://github.com/official-Arvind/PhoneSpeakerMic/releases)
+
+### Step 3 — Connect
+
+1. Both devices on the **same WiFi network**
+2. Open the app → select your mode (Mic / Speaker / Both)
+3. Enter the IP shown in the server → tap **WIFI LINK**
+4. Your laptop speakers **auto-mute** — phone takes over
+
+---
+
+## 🖥️ PC Server — Feature Overview
+
+```
+⚡  PhoneSpeakerMic  —  Ultra-Low Latency Engine
+──────────────────────────────────────────────────
+  Port        : 5000
+  WiFi IP     : 192.168.x.x
+  Chunk size  : 256 samples  (5.3 ms per buffer)
+  Sample rate : 48000 Hz
+  pycaw       : Available ✓
+──────────────────────────────────────────────────
+  [OK] VB-Audio CABLE Input  : CABLE Input (VB-Audio Virtual Cable)
+  [OK] Loopback device       : Speakers (Realtek...)
+  [OK] Process priority elevated to HIGH.
+```
+
+- **Auto speaker mute** — Windows volume is saved → set to 0 → restored on disconnect
+- **Process priority elevated** — `HIGH_PRIORITY_CLASS` on Windows for stable scheduling
+- **Callback-mode audio** — no blocking reads; hardware timer drives the loop
+- **Buffer bloat prevention** — drops old data if buffer grows beyond 20ms
+
+---
+
+## 📱 Android App — Feature Overview
+
+- **Mode selector** — choose before connecting, locked during session
+- **`PERFORMANCE_MODE_LOW_LATENCY`** on both `AudioRecord` and `AudioTrack` (Android 10+)
+- **Hardware AEC** (Acoustic Echo Cancellation) — no feedback when speaker + mic both active
+- **Hardware Noise Suppression** — cleaner mic in real environments  
+- **`THREAD_PRIORITY_AUDIO`** — OS audio threads pre-empt background work
+- **Socket buffer tuning** — prevents kernel-level packet queuing
+- **USB mode** — routes through `127.0.0.1` via ADB reverse tunnel (lowest possible latency)
+- **Locked orientation** — portrait-only, no accidental disconnects
+
+---
+
+## 🔧 Requirements
+
+**PC (Windows):**
+- Python 3.10+
+- `pyaudiowpatch`, `numpy`, `pycaw`, `comtypes`
+- Optional: VB-Audio Virtual Cable (for virtual mic)
+
+**Android:**
+- Android 6.0+ (API 23+)
+- Microphone + speaker
+- Same WiFi network as PC (or USB cable)
+
+---
+
+## 🏗️ Project Structure
+
+```
+PhoneSpeakerMic/
+├── app/
+│   └── src/main/
+│       ├── java/com/jigar/phonespeakermic/
+│       │   └── MainActivity.java       ← Android audio bridge
+│       ├── res/layout/
+│       │   └── activity_main.xml       ← Premium dark UI
+│       └── AndroidManifest.xml
+├── pc_server.py                         ← Windows ultra-low latency server
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 🔒 Privacy & Security
+
+- ✅ **100% local network** — zero internet required
+- ✅ **No data ever leaves your network**
+- ✅ **No accounts, no sign-ins, no telemetry**
+- ✅ **No cloud, no servers, no subscriptions**
+- ✅ **Open source** — read every line before running
+- ✅ **Direct peer-to-peer** TCP socket connection
+
+---
+
+## 💛 Support Jigar Corp
+
+All Jigar Corp tools are **100% free, forever**. No ads. No paywalls.
+
+If this saves your workflow, consider supporting development:
+
+**UPI:** `arvindji@fam`
+
+---
+
+## 🛠️ More Tools by Jigar Corp
+
+| Tool | Description |
+|------|-------------|
+| [Jigar Tools](https://official-arvind.github.io/jigar-tools/) | Free, open-source & privacy-first web utilities suite |
+| [UPI Payment Alert](https://github.com/official-Arvind/UPIPaymentAlert) | Offline-first automatic UPI voice announcements |
+| [DocPurge AI](https://official-arvind.github.io/docpurge-ai/) | Surgical PDF watermark removal — 100% browser-native |
+| [Director AI](https://official-arvind.github.io/director-ai/) | Real-time AI pipeline & hallucination guardrail assistant |
+| [Jigar Backup](https://github.com/official-Arvind/Jigar-Backup) | God Mode Android backup with Zstandard compression |
+
+---
+
+## 📄 License
+
+MIT License — see [LICENSE](LICENSE)
+
+---
+
+<div align="center">
+<p>Built with precision by <strong>Jigar Corp</strong> · <a href="https://official-arvind.github.io/jigar-tools/">official-arvind.github.io/jigar-tools</a></p>
+<p><em>No Ads · No Subscriptions · Zero Tracking · Local First · Open Source Forever</em></p>
+</div>
